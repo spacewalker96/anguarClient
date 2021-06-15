@@ -1,3 +1,4 @@
+import { Photo } from './../../model/photo';
 import { Product } from './../../model/product';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -11,13 +12,16 @@ import { ProductService } from 'src/app/service/product.service';
 export class ProductComponent implements OnInit {
 
   products:Product[];
+  photos:Photo[];
   message = '';
 
   constructor(private productService:ProductService) { }
 
   ngOnInit(): void {
     this.message = '';
+
     this.listProducts();
+    // this.listImages();
     // this.listProducts(this.route.snapshot.params.id);
 
   }
@@ -27,9 +31,19 @@ export class ProductComponent implements OnInit {
     this.productService.getAll().subscribe(
       data => {
         this.products = data;
+        console.log(data)
+
       }
     )
   }
+  // listImages() {
+  //   this.productService.getImage().subscribe(
+  //     data => {
+  //       this.photos = data;
+  //       console.log(data)
+  //     }
+  //   )
+  // }
 
   // getProduct(id: string): void {
   //   this.productService.get(id)
